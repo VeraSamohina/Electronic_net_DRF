@@ -16,7 +16,7 @@ class Seller(models.Model):
     number_home = models.IntegerField(verbose_name='номер дома')
     product = models.ForeignKey('Product', on_delete=models.SET_NULL, null=True, verbose_name='товар')
     provider = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, verbose_name='поставщик')
-    level = models.CharField(choices=Level.choices, verbose_name='уровень')add
+    level = models.CharField(choices=Level.choices, verbose_name='уровень')
     debt = models.DecimalField(max_digits=12, decimal_places=2, verbose_name='задолженность')
     create_date = models.DateField(auto_now_add=True, verbose_name='дата добавления')
 
