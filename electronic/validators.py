@@ -17,8 +17,8 @@ class SellerLevelValidator:
         """
         level = value.get(self.level)
         provider = value.get(self.provider)
-
-        if level == 'ZERO' and provider != self:
-            raise ValidationError('У поставщика нулевого уровня не может быть другого поставщика')
-        elif level == 'FIRST' and provider.level == 'SECOND':
-            raise ValidationError('У поставщика первого уровня не может поставщика второго уровня')
+        if provider:
+            if level == 0 and provider != self:
+                raise ValidationError('У поставщика нулевого уровня не может быть другого поставщика')
+            elif level == 1 and provider.level == 2:
+                raise ValidationError('У поставщика первого уровня не может поставщика второго уровня')

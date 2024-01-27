@@ -14,7 +14,7 @@ class SellerListCreateAPIView(generics.ListCreateAPIView):
 
 
 class SellerUpdateAPIView(generics.UpdateAPIView):
-    """Представление для """
+    """Представление для обновления продавца"""
     serializer_class = SellerUpdateSerializer
     queryset = Seller.objects.all()
 

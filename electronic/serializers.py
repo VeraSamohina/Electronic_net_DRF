@@ -1,14 +1,21 @@
 from rest_framework import serializers
-
-from electronic.models import Seller
+from electronic.models import Seller, Product
 from electronic.validators import SellerLevelValidator
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    """
+    Сериалайзер модели Product(Продукт).
+    """
+    class Meta:
+        model = Product
+        fields = '__all__'
 
 
 class SellerSerializer(serializers.ModelSerializer):
     """Сериалайзер для модели продавца"""
 
     validators = [SellerLevelValidator(level='level', provider='provider')]
-
 
     class Meta:
         model = Seller
@@ -28,10 +35,9 @@ class SellerUpdateSerializer(serializers.ModelSerializer):
 
 class SellerDetailSerializer(serializers.ModelSerializer):
     """Сериалайзер для детальной модели продавца"""
-    provider = serializers.CharField(source="provider.title")
-    product = serializers.CharField(source="product.title")
-    product_model = serializers.CharField(source="product.product_model")
-    launch_date = serializers.CharField(source="product.launch_date")
+
+    provider = serializers.SlugRelatedField(slug_field='title', queryset=Seller.objects.all())
+    product = ProductSerializer(many=True, required=False)
 
     class Meta:
         model = Seller
