@@ -2,6 +2,7 @@ from rest_framework import generics
 from rest_framework.filters import SearchFilter
 
 from electronic.models import Seller
+from electronic.permissions import IsActiveUser
 from electronic.serializers import SellerSerializer, SellerDetailSerializer, SellerUpdateSerializer
 
 
@@ -11,12 +12,14 @@ class SellerListCreateAPIView(generics.ListCreateAPIView):
     filter_backends = (SearchFilter,)
     search_fields = ['title']
     queryset = Seller.objects.all()
+    permission_classes = [IsActiveUser]
 
 
 class SellerUpdateAPIView(generics.UpdateAPIView):
     """Представление для обновления продавца"""
     serializer_class = SellerUpdateSerializer
     queryset = Seller.objects.all()
+    permission_classes = [IsActiveUser]
 
 
 class SellerDetailAPIView(generics.RetrieveDestroyAPIView):
@@ -25,4 +28,5 @@ class SellerDetailAPIView(generics.RetrieveDestroyAPIView):
     """
     serializer_class = SellerDetailSerializer
     queryset = Seller.objects.all()
+    permission_classes = [IsActiveUser]
 

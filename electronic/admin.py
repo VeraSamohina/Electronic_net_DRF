@@ -8,13 +8,13 @@ admin.site.register(Product)
 
 
 @admin.action(description='Очистить задолженность перед поставщиком')
-def clear_debt(modeladmin, request, queryset):
+def clear_debt(request, queryset):
     queryset.update(debt='0')
 
 
 @admin.register(Seller)
 class SellerAdmin(admin.ModelAdmin):
-    list_display = ('title', 'country', 'city',  'view_provider_link')
+    list_display = ('title', 'country', 'city', 'view_provider_link')
     list_filter = ('city',)
     actions = [clear_debt]
 
