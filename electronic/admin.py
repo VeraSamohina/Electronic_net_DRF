@@ -15,7 +15,7 @@ def clear_debt(request, queryset):
 @admin.register(Seller)
 class SellerAdmin(admin.ModelAdmin):
     list_display = ('title', 'country', 'city', 'view_provider_link')
-    list_filter = ('city',)
+    list_filter = ('country',)
     actions = [clear_debt]
 
     def view_provider_link(self, obj):
